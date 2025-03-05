@@ -14,7 +14,7 @@ st.markdown("""
       .main {text-align: center;}
       .stTextInput {width: 60% !important; marin:auto;}      
       .stButton button {width:50%; background-color #4caf50; color: white; font-size: 17px;}
-      .stButton button:hover {background-color: #45a049;}
+      .stButton button:hover {background-color:red; color:white;}
 </style>
 """, unsafe_allow_html=True)
 #page tital and decription
