@@ -12,8 +12,8 @@ st.set_page_config(page_title="password strenth checker by Asad Ali", page_icon=
 st.markdown("""
 <style>
       .main {text-align: center;}
-      .stTextInput {width: 60% !important; marin:auto;}      
-      .stButton button {width:50%; background-color #4caf50; color: white; font-size: 17px;}
+      .stTextInput {width: 60% !important; margin:auto;}      
+      .stButton button {width:50%; background-color: #4caf50; color: white; font-size: 17px;}
       .stButton button:hover {background-color:red; color:white;}
 </style>
 """, unsafe_allow_html=True)
@@ -22,7 +22,7 @@ st.title ("🔐 password strenght Genrator")
 st.write(" Enter your password below to check its security level! 🔍")
 
 #function to check password strength
-def chec_password_strength(password):
+def check_password_strength(password):
     score = 0
     feedback = []
 
@@ -33,7 +33,7 @@ def chec_password_strength(password):
 
     if re.search(r"[A-Z]", password) and re.search(r"[a-z]", password):
         score += 1
-    else :
+    else:
         feedback.append("password should include **both upper case(A-Z) and lower case (a-z) letters**⛑️")
 
     if re.search (r"\d", password):
@@ -41,11 +41,11 @@ def chec_password_strength(password):
     else:
         feedback.append("password should include **at atlest one number (0-9) **⛑️")
     
-    #spacial charaters
-    if re.search(r"[!@$&^%]", password):
-        score +=1
+    #special characters (fixed spelling)
+    if re.search(r"[!@#$%^&*(),.?\":{}|<>]", password):
+        score += 1
     else:
-        feedback.append("include **at least one special charater (!@$&^%)**⛑️")
+        feedback.append("include **at least one special character (!@#$%^&*(),.?\":{}|<>)**⛑️")
 
     #display password strength result
     if score == 4:
@@ -59,13 +59,13 @@ def chec_password_strength(password):
     if feedback:
         with st.expander("🔍**improve your password**"):
             for item in feedback:
-                  st.write(item)
+                st.write(item)
 
-    password = st.text_input("Enter your password:", type="password", help="Ensure your password is strong 🔐")
+# Move these lines OUTSIDE the function
+password = st.text_input("Enter your password:", type="password", help="Ensure your password is strong 🔐")
 
-    #Butoon Working
-    if st.button("Check strength"):
-        if password:
-            chec_password_strength(password)
-        else:
-            st.warning("⚠️ please enter a password first!") #show warning if password empty
+if st.button("Check strength"):
+    if password.strip():
+        check_password_strength(password)
+    else:
+        st.warning("⚠️ please enter a password first!")
